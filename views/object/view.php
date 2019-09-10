@@ -19,7 +19,8 @@ use yii\widgets\DetailView;
             'cost',
             'position',
             'description',
-            'status_id',
+            'status.name',
+            'category.name',
         ],
     ]) ?>
 

@@ -14,6 +14,24 @@ return [
     ],
     [
         'class' => '\kartik\grid\DataColumn',
+        'attribute' => 'category_id',
+        'contentOptions' => ['style' => 'white-space: normal;'],
+        'headerOptions' => ['style' => 'white-space: normal;'],
+        'label' => 'Категория',
+        'value' => function ($model)
+        {
+            return $model->category->name;
+        },
+        'filterType' => '\kartik\widgets\Select2',
+        'filterWidgetOptions' => [
+            'data' => \app\models\Object::getCategories(),
+            'pluginOptions' => ['allowClear' => true],
+        ],
+        'filterInputOptions' => ['placeholder' => 'Любой статус'],
+        'format' => 'raw',
+    ],
+    [
+        'class' => '\kartik\grid\DataColumn',
         'attribute' => 'name',
     ],
     [
@@ -29,14 +47,14 @@ return [
         'attribute' => 'date',
         'width' => '100px',
     ],
-    [
-        'class' => '\kartik\grid\DataColumn',
-        'attribute' => 'count',
-    ],
-    [
-        'class' => '\kartik\grid\DataColumn',
-        'attribute' => 'cost',
-    ],
+//    [
+//        'class' => '\kartik\grid\DataColumn',
+//        'attribute' => 'count',
+//    ],
+//    [
+//        'class' => '\kartik\grid\DataColumn',
+//        'attribute' => 'cost',
+//    ],
     [
         'class' => '\kartik\grid\DataColumn',
         'attribute' => 'position',
@@ -45,10 +63,10 @@ return [
             'options' => ['multiple' => true]
         ],
     ],
-    [
-        'class' => '\kartik\grid\DataColumn',
-        'attribute' => 'description',
-    ],
+//    [
+//        'class' => '\kartik\grid\DataColumn',
+//        'attribute' => 'description',
+//    ],
     [
         'class' => '\kartik\grid\DataColumn',
         'attribute' => 'status_id',

@@ -1,10 +1,10 @@
 <?php
 
 use kartik\money\MaskMoney;
+use kartik\select2\Select2;
 use kartik\widgets\DatePicker;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
-use kartik\select2\Select2;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Object */
@@ -44,6 +44,14 @@ use kartik\select2\Select2;
 
     <?= $form->field($model, 'status_id')->widget(Select2::classname(), [
         'data' => $model->getStatuses(),
+        'pluginOptions' => [
+            'allowClear' => true
+        ],
+    ]); ?>
+
+    <?= $form->field($model, 'category_id')->widget(Select2::classname(), [
+        'data' => $model->getCategories(),
+        'options' => ['placeholder' => 'Выберите категорию ...'],
         'pluginOptions' => [
             'allowClear' => true
         ],

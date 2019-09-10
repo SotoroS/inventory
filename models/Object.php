@@ -18,6 +18,7 @@ use yii\helpers\ArrayHelper;
  * @property string $position
  * @property string $description
  * @property int $status_id
+ * @property int $category_id
  *
  * @property Status $status
  */
@@ -38,7 +39,7 @@ class Object extends \yii\db\ActiveRecord
     {
         return [
             [['date'], 'safe'],
-            [['count', 'status_id'], 'integer'],
+            [['count', 'status_id', 'category_id'], 'integer'],
             [['cost'], 'number'],
             [['name', 'inventory_id', 'budget', 'position', 'description'], 'string', 'max' => 255],
             [['status_id'], 'exist', 'skipOnError' => true, 'targetClass' => Status::className(), 'targetAttribute' => ['status_id' => 'id']],
@@ -61,6 +62,7 @@ class Object extends \yii\db\ActiveRecord
             'position' => 'Местоположение',
             'description' => 'Описание',
             'status_id' => 'Статус',
+            'category_id' => 'Категория',
         ];
     }
 
@@ -73,11 +75,30 @@ class Object extends \yii\db\ActiveRecord
     }
 
     /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getCategory()
+    {
+        return $this->hasOne(Category::className(), ['id' => 'category_id']);
+    }
+
+    /**
      * @return array
      */
     public static function getStatuses()
     {
         $statuses = Status::find()->asArray()->all();
+        $array = ArrayHelper::map($statuses, 'id', 'name');
+
+        return $array;
+    }
+
+    /**
+     * @return array
+     */
+    public static function getCategories()
+    {
+        $statuses = Category::find()->asArray()->all();
         $array = ArrayHelper::map($statuses, 'id', 'name');
 
         return $array;

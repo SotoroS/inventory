@@ -20,7 +20,7 @@ class ObjectSearch extends Object
     public function rules()
     {
         return [
-            [['id', 'count', 'status_id'], 'integer'],
+            [['id', 'count', 'status_id', 'category_id'], 'integer'],
             [['name', 'inventory_id', 'budget', 'date', 'position', 'description'], 'safe'],
             [['cost'], 'number'],
         ];
@@ -61,6 +61,7 @@ class ObjectSearch extends Object
         $query->andFilterWhere([
             'id' => $this->id,
             'status_id' => $this->status_id,
+            'category_id' => $this->category_id,
         ]);
 
         if ($this->date == $this->searchEmptyCommand) {
